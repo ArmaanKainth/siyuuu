@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Birthday Sia 💜</title>
+<style>
+  /* Fonts & base */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+  :root{
+    --bg1:#d7b0f5;
+    --bg2:#f8d0f8;
+    --lav1:#e7c7f7;
+    --accent: rgba(255,182,193,.95);
+    --white-90: rgba(255,255,255,0.9);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(120deg,var(--bg1),var(--bg2));
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:24px;
+    animation: bgShift 12s ease-in-out infinite alternate;
+  }
+
+  /* Background shift */
+  @keyframes bgShift {
+    0% { filter: hue-rotate(0deg) saturate(1); }
+    50% { filter: hue-rotate(6deg) saturate(1.05) brightness(1.02); }
+    100% { filter: hue-rotate(-6deg) saturate(1) brightness(1); }
+  }
+
+  /* Card container (mobile-first, larger on wider) */
+  .card-wrap{
+    width:100%;
+    max-width:520px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .card {
+    width:100%;
+    max-width:420px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+    border-radius:22px;
+    padding:20px;
+    padding-bottom:34px;
+    box-shadow: 0 10px 40px rgba(149, 76, 233, 0.08);
+    position:relative;
+    overflow:visible;
+    border:1px solid rgba(255,255,255,0.18);
+    transform-origin:center;
+    /* entrance */
+    opacity:0;
+    transform: translateY(10px) scale(0.995);
+    animation: cardEntrance 900ms ease-out forwards 300ms;
+  }
+
+  @keyframes cardEntrance {
+    to { opacity:1; transform: translateY(0) scale(1); }
+  }
+
+  /* gentle float */
+  .card { animation: float 6s ease-in-out infinite alternate, cardEntrance 900ms ease-out forwards 300ms; }
+  @keyframes float { from{transform: translateY(0)} to{transform: translateY(-8px)} }
+
+  /* Glowing border pulse */
+  .card::before{
+    content:"";
+    position:absolute;inset:-6px;border-radius:26px;
+    background:linear-gradient(90deg, rgba(255,182,193,0.12), rgba(199, 157, 241,0.12));
+    z-index: -1;
+    filter: blur(12px);
+    opacity:0.6;
+    animation: borderPulse 4s ease-in-out infinite;
+  }
+  @keyframes borderPulse {
+    0%{transform:scale(.98);opacity:.45}
+    50%{transform:scale(1.02);opacity:0.9}
+    100%{transform:scale(.98);opacity:.45}
+  }
+
+  /* Title - glowing text */
+  .title{
+    font-size:1.6rem;
+    margin:6px 0 10px;
+    color:var(--white-90);
+    font-weight:700;
+    letter-spacing:0.2px;
+    text-shadow: 0 4px 20px rgba(255,182,193,0.18);
+    animation: titleGlow 2.6s ease-in-out infinite alternate;
+  }
+  @keyframes titleGlow {
+    from { text-shadow: 0 6px 18px rgba(255,182,193,0.18); color:white; }
+    to   { text-shadow: 0 10px 32px rgba(255,150,200,0.35); color:#fffdfd; }
+  }
+
+  /* Center photo, rounded rectangle */
+  .photo-frame{
+    width:92%;
+    max-width:360px;
+    margin:12px auto 18px;
+    border-radius:16px;
+    overflow:hidden;
+    position:relative;
+    box-shadow: 0 10px 26px rgba(149,76,233,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    transform: translateZ(0);
+    animation: photoEntrance 800ms cubic-bezier(.2,.9,.3,1) forwards 550ms;
+  }
+  @keyframes photoEntrance { from { opacity:0; transform: translateY(10px) scale(.995);} to { opacity:1; transform: translateY(0) scale(1);} }
+
+  .photo {
+    display:block;
+    width:100%;
+    height: 250px;
+    object-fit:cover;
+    object-position:center;
+    transition: transform .9s ease, filter .9s ease;
+    will-change: transform;
+  }
+
+  /* photo shine overlay */
+  .photo-frame::after{
+    content:"";
+    position:absolute;left:-40%;top:-30%;
+    width:60%;height:160%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+    transform: rotate(25deg) translateX(-20%);
+    filter: blur(12px);
+    opacity:0;
+    transition: opacity .9s ease, transform 1.2s ease;
+    pointer-events:none;
+  }
+  .photo-frame:hover::after{ opacity:1; transform: rotate(25deg) translateX(30%); }
+
+  /* sparkle ring around photo (tiny css particles) */
+  .sparkles { position:absolute; inset:6px; pointer-events:none; z-index:4; mix-blend-mode:screen; }
+
+  /* message */
+  .message{
+    color: #fff;
+    font-size:1.05rem;
+    font-weight:600;
+    line-height:1.7;
+    padding:0 6px;
+    margin-top:8px;
+    text-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    opacity:0;
+    animation: messageIn 700ms ease-out forwards 900ms;
+  }
+  @keyframes messageIn { to { opacity:1 } }
+
+  /* small responsive tweaks */
+  @media (min-width:640px){
+    .card { max-width:480px; padding:28px; }
+    .photo { height:280px; }
+    .title { font-size:2rem; }
+    .message { font-size:1.08rem; }
+  }
+
+  /* floating particles layer - subtle */
+  .particle { position:absolute; width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.6);filter:blur(.6px);opacity:.8; }
+
+  /* ribbon wave */
+  .ribbon {
+    position:absolute; left:-10%; top:12%;
+    width:120%; height:40px; border-radius:40px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    transform: rotate(4deg);
+    animation: ribbonWave 8s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes ribbonWave { 0%{transform:translateX(0) rotate(4deg)} 50%{transform:translateX(-4%) rotate(4deg)} 100%{transform:translateX(0) rotate(4deg)} }
+
+  /* subtle text shimmer (over message) */
+  .message::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;top:0;bottom:0;pointer-events:none;
+    background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.06), rgba(255,255,255,0));
+    mix-blend-mode:screen;
+    opacity:0;
+    transition:opacity .8s ease;
+  }
+  .card:hover .message::after { opacity:1; animation: shimmer 2s linear infinite; }
+  @keyframes shimmer { from{transform:translateX(-40%)} to{transform:translateX(120%)} }
+
+  /* small helper: invisible canvas area for performance */
+  #effects { position:fixed; inset:0; pointer-events:none; z-index:2; }
+</style>
+</head>
+<body>
+  <!-- Particle canvas for heavy animations -->
+  <canvas id="effects"></canvas>
+
+  <div class="card-wrap">
+    <div class="card" role="main" aria-label="Birthday card for Sia">
+      <div class="ribbon" aria-hidden="true"></div>
+
+      <h1 class="title">💜 Happy Birthday Sia</h1>
+
+      <!-- photo frame: replace src with sia.jpg (same folder) -->
+      <div class="photo-frame" aria-hidden="false">
+        <img src="sia.jpg" alt="Sia" class="photo" id="photo" />
+        <svg class="sparkles" width="100%" height="100%" viewBox="0 0 200 120" preserveAspectRatio="none">
+          <!-- a few sparkles drawn as circles/paths -->
+          <g fill="white" opacity="0.9">
+            <circle cx="12" cy="18" r="1.8" fill="rgba(255,255,255,0.95)"/>
+            <circle cx="36" cy="36" r="1.6" fill="rgba(255,255,255,0.9)"/>
+            <circle cx="160" cy="28" r="1.5" fill="rgba(255,255,255,0.9)"/>
+            <circle cx="110" cy="80" r="1.3" fill="rgba(255,255,255,0.85)"/>
+            <path d="M82 20 l4 8 l-8 0 z" fill="rgba(255,255,255,0.9)" opacity="0.8"/>
+          </g>
+        </svg>
+      </div>
+
+      <p class="message">
+        Dear Sia,<br><br>
+        Your presence makes the small things feel gentle and the ordinary feel extraordinary. Each smile of yours lights up even the quietest moments.<br><br>
+        Today I wish you soft laughter, warm memories, and every peaceful joy your heart hopes for. 💜<br><br>
+        — with love
+      </p>
+    </div>
+  </div>
+
+<script>
+/* =========================
+   Canvas and DOM animations
+   ========================= */
+
+const canvas = document.getElementById('effects');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = innerWidth;
+let H = canvas.height = innerHeight;
+
+// resize
+window.addEventListener('resize', () => {
+  W = canvas.width = innerWidth;
+  H = canvas.height = innerHeight;
+});
+
+// utility
+const rand = (a,b) => a + Math.random()*(b-a);
+
+// particle arrays
+const confetti = [];
+const hearts = [];
+const stars = [];
+const floaters = [];
+
+// create confetti pieces (continuous falling)
+for(let i=0;i<90;i++){
+  confetti.push({
+    x: Math.random()*W,
+    y: Math.random()*H*1.5 - H,
+    w: rand(6,12),
+    h: rand(6,12),
+    hue: rand(300,350),
+    rot: rand(0,360),
+    speedY: rand(0.6,2.2),
+    swing: rand(0.4,1.6)
+  });
+}
+
+// create hearts that float upward gently
+for(let i=0;i<18;i++){
+  hearts.push({
+    x: Math.random()*W,
+    y: H + Math.random()*H,
+    size: rand(6,18),
+    speed: rand(0.4,1.6),
+    hue: rand(320,350),
+    sway: rand(10,60)
+  });
+}
+
+// small twinkling stars in bg
+for(let i=0;i<40;i++){
+  stars.push({
+    x: Math.random()*W,
+    y: Math.random()*H,
+    r: Math.random()*1.8 + 0.6,
+    alpha: Math.random()*0.6 + 0.2,
+    tw: Math.random()*1.6 + 0.6
+  });
+}
+
+// soft floating particles for depth
+for(let i=0;i<30;i++){
+  floaters.push({
+    x: Math.random()*W,
+    y: Math.random()*H,
+    r: rand(2,8),
+    vx: rand(-0.15,0.15),
+    vy: rand(-0.05,0.05),
+    alpha: rand(.06,.18)
+  });
+}
+
+// draw a rounded heart shape function (simple)
+function drawHeart(x,y,s,hue,alpha){
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.rotate(Math.PI/4);
+  ctx.fillStyle = `hsla(${hue},85%,70%,${alpha})`;
+  ctx.beginPath();
+  ctx.moveTo(0, -s/2);
+  ctx.bezierCurveTo(s/2,-s*1.1,s*1.2,-s/4,0,s);
+  ctx.bezierCurveTo(-s*1.2,-s/4,-s/2,-s*1.1,0,-s/2);
+  ctx.fill();
+  ctx.restore();
+}
+
+let t = 0;
+function frame(){
+  t += 1/60;
+  ctx.clearRect(0,0,W,H);
+
+  // gentle gradient overlay
+  const g = ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'rgba(255,255,255,0.01)');
+  g.addColorStop(1,'rgba(255,255,255,0.02)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,W,H);
+
+  // draw floaters
+  floaters.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if(p.x < -20) p.x = W + 20;
+    if(p.x > W + 20) p.x = -20;
+    if(p.y < -20) p.y = H + 20;
+    if(p.y > H + 20) p.y = -20;
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+
+  // stars (twinkle)
+  stars.forEach(s => {
+    const a = (Math.sin(t * s.tw + s.x*0.001) + 1)/2 * s.alpha;
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,255,255,${a})`;
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  // confetti falling (pastel hues)
+  confetti.forEach(c => {
+    c.y += c.speedY;
+    c.x += Math.sin((c.y + c.x) * 0.01) * c.swing * 0.01;
+    c.rot += 0.05;
+    if(c.y > H + 40){
+      c.y = -30;
+      c.x = Math.random()*W;
+    }
+    ctx.save();
+    ctx.translate(c.x, c.y);
+    ctx.rotate(c.rot);
+    ctx.fillStyle = `hsl(${c.hue}, 80%, 70%)`;
+    ctx.fillRect(-c.w/2, -c.h/2, c.w, c.h);
+    ctx.restore();
+  });
+
+  // hearts float up
+  hearts.forEach(h => {
+    h.y -= h.speed;
+    h.x += Math.sin((h.y + t*10)/80) * (h.sway*0.02);
+    if(h.y < -40){
+      h.y = H + Math.random()*H*0.6;
+      h.x = Math.random()*W;
+    }
+    drawHeart(h.x, h.y, h.size, h.hue, 0.85 - (h.size/60));
+  });
+
+  // subtle vignette near card (optional, soft)
+  ctx.beginPath();
+  const cx = W/2, cy = H/2;
+  const radius = Math.max(W,H)*0.9;
+  const rg = ctx.createRadialGradient(cx,cy,radius*0.2,cx,cy,radius);
+  rg.addColorStop(0,'rgba(0,0,0,0)');
+  rg.addColorStop(1,'rgba(0,0,0,0.02)');
+  ctx.fillStyle = rg;
+  ctx.fillRect(0,0,W,H);
+
+  requestAnimationFrame(frame);
+}
+frame();
+
+/* subtle interactive / photo zoom on tap for mobile */
+const photo = document.getElementById('photo');
+let tapped = false;
+photo.addEventListener('click', () => {
+  tapped = !tapped;
+  photo.style.transform = tapped ? 'scale(1.04) translateY(-6px)' : 'scale(1)';
+});
+
+/* Accessibility: reduce motion respect */
+const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+if(mq.matches){
+  // stop heavy animations
+  cancelAnimationFrame(frame);
+  // Simplify canvas: clear and draw static stars only
+  ctx.clearRect(0,0,W,H);
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+  });
+}
+</script>
+</body>
+</html>
